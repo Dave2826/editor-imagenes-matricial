@@ -91,61 +91,42 @@ function imagenAMatriz(rutaImagen) {
 }
 
 
-/**
- * Ejercicio 1.2: Convertir matriz de píxeles a imagen PNG (5 puntos)
- * 
- * Proceso inverso: tomar una matriz de píxeles y guardarla como PNG.
- * 
- * @param {Array<Array<Object>>} matriz - Matriz de píxeles {r,g,b,a}
- * @param {string} rutaSalida - Ruta donde guardar el PNG
- * 
- * Pistas:
- * - Usa new PNG({width, height}) para crear la imagen
- * - Recorre la matriz y llena png.data con los valores
- * - Usa PNG.sync.write(png) para generar el buffer
- * - Usa fs.writeFileSync() para guardar el archivo
- * 
- * @example
- * const matriz = imagenAMatriz('entrada.png');
- * matrizAImagen(matriz, 'imagenes/salida/copia.png');
- */
 function matrizAImagen(matriz, rutaSalida) {
-  // TODO: Implementar la conversión de matriz a PNG
-  
-  // 1. Validar la matriz
-  // validarMatriz(matriz);
-  
+  // 1. Validar matriz de píxeles
+  validarMatriz(matriz);
+
   // 2. Obtener dimensiones
-  // const dims = obtenerDimensiones(matriz);
-  
-  // 3. Crear el PNG
-  // const png = new PNG({
-  //   width: dims.columnas,
-  //   height: dims.filas
-  // });
-  
-  // 4. Llenar png.data
-  // for (let y = 0; y < dims.filas; y++) {
-  //   for (let x = 0; x < dims.columnas; x++) {
-  //     const idx = (dims.columnas * y + x) << 2;
-  //     const pixel = matriz[y][x];
-  //     
-  //     png.data[idx] = limitarValorColor(pixel.r);
-  //     png.data[idx + 1] = limitarValorColor(pixel.g);
-  //     png.data[idx + 2] = limitarValorColor(pixel.b);
-  //     png.data[idx + 3] = limitarValorColor(pixel.a);
-  //   }
-  // }
-  
-  // 5. Asegurar que existe el directorio de salida
-  // asegurarDirectorio(path.dirname(rutaSalida));
-  
-  // 6. Guardar el archivo
-  // const buffer = PNG.sync.write(png);
-  // fs.writeFileSync(rutaSalida, buffer);
-  
-  // ESCRIBE TU CÓDIGO AQUÍ
+  const dims = obtenerDimensiones(matriz);
+  const { filas, columnas } = dims;
+
+  // 3. Crear nueva imagen PNG
+  const png = new PNG({
+    width: columnas,
+    height: filas
+  });
+
+  // 4. Llenar png.data con los valores RGBA de cada pixel
+  for (let y = 0; y < filas; y++) {
+    for (let x = 0; x < columnas; x++) {
+      const idx = (columnas * y + x) << 2; // index * 4
+      const pixel = matriz[y][x];
+
+      png.data[idx]     = limitarValorColor(pixel.r);
+      png.data[idx + 1] = limitarValorColor(pixel.g);
+      png.data[idx + 2] = limitarValorColor(pixel.b);
+      png.data[idx + 3] = limitarValorColor(pixel.a);
+    }
+  }
+
+  // 5. Asegurar que exista el directorio de salida
+  const dir = path.dirname(rutaSalida);
+  asegurarDirectorio(dir);
+
+  // 6. Guardar el archivo PNG
+  const buffer = PNG.sync.write(png);
+  fs.writeFileSync(rutaSalida, buffer);
 }
+
 
 /**
  * Ejercicio 1.3: Obtener un canal específico de color (5 puntos)
