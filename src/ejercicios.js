@@ -475,10 +475,36 @@ function mezclarImagenes(matriz1, matriz2, factor) {
  * const vintage = aplicarSepia(matriz);
  */
 function aplicarSepia(matriz) {
-  // TODO: Implementar filtro sepia
-  
-  return []; // REEMPLAZAR
+  const filas = matriz.length;
+  const columnas = matriz[0].length;
+
+  const resultado = crearMatrizVacia(filas, columnas);
+
+  for (let i = 0; i < filas; i++) {
+    for (let j = 0; j < columnas; j++) {
+      const pixel = matriz[i][j];
+
+      // Calcular valores sepia
+      const r = pixel.r;
+      const g = pixel.g;
+      const b = pixel.b;
+
+      const nuevoR = limitarValorColor(0.393 * r + 0.769 * g + 0.189 * b);
+      const nuevoG = limitarValorColor(0.349 * r + 0.686 * g + 0.168 * b);
+      const nuevoB = limitarValorColor(0.272 * r + 0.534 * g + 0.131 * b);
+
+      resultado[i][j] = {
+        r: nuevoR,
+        g: nuevoG,
+        b: nuevoB,
+        a: pixel.a
+      };
+    }
+  }
+
+  return resultado;
 }
+
 
 /**
  * Ejercicio 4.3: Detectar bordes (simplificado) (8 puntos)
