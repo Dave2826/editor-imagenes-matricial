@@ -351,10 +351,15 @@ function voltearHorizontal(matriz) {
  * const invertido = voltearVertical(matriz);
  */
 function voltearVertical(matriz) {
-  // TODO: Implementar volteo vertical
-  
-  return []; // REEMPLAZAR
+  // Crear copia profunda
+  const resultado = copiarMatriz(matriz);
+
+  // Invertir el orden de las filas (arriba ↔ abajo)
+  resultado.reverse();
+
+  return resultado;
 }
+
 
 /**
  * Ejercicio 3.3: Rotar 90 grados en sentido horario (10 puntos)
