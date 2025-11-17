@@ -237,10 +237,26 @@ function ajustarBrillo(matriz, factor) {
  * // Rojo (255,0,0) → Cian (0,255,255)
  */
 function invertirColores(matriz) {
-  // TODO: Implementar inversión de colores
-  
-  return []; // REEMPLAZAR
+  // Crear copia profunda para no modificar la matriz original
+  const resultado = copiarMatriz(matriz);
+
+  // Recorrer cada pixel
+  for (let i = 0; i < resultado.length; i++) {
+    for (let j = 0; j < resultado[i].length; j++) {
+      const p = matriz[i][j];
+
+      resultado[i][j] = {
+        r: 255 - p.r,
+        g: 255 - p.g,
+        b: 255 - p.b,
+        a: p.a  // Alpha no cambia
+      };
+    }
+  }
+
+  return resultado;
 }
+
 
 /**
  * Ejercicio 2.3: Convertir a escala de grises (9 puntos)
