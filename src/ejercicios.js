@@ -127,49 +127,32 @@ function matrizAImagen(matriz, rutaSalida) {
   fs.writeFileSync(rutaSalida, buffer);
 }
 
-
-/**
- * Ejercicio 1.3: Obtener un canal específico de color (5 puntos)
- * 
- * Extrae solo un canal (R, G, o B) de la imagen y crea una imagen en escala de grises
- * donde ese canal es el valor de gris.
- * 
- * @param {Array<Array<Object>>} matriz - Matriz de píxeles
- * @param {string} canal - 'r', 'g', o 'b'
- * @returns {Array<Array<Object>>} - Matriz con solo ese canal
- * 
- * @example
- * const matriz = imagenAMatriz('imagen.png');
- * const soloRojo = obtenerCanal(matriz, 'r');
- * // Si un pixel era {r:200, g:100, b:50, a:255}
- * // Ahora será {r:200, g:200, b:200, a:255} (gris)
- */
 function obtenerCanal(matriz, canal) {
-  // TODO: Implementar extracción de canal
-  
-  // 1. Validar parámetros
-  // if (!['r', 'g', 'b'].includes(canal)) {
-  //   throw new Error("El canal debe ser 'r', 'g', o 'b'");
-  // }
-  
-  // 2. Crear matriz resultado
-  // const resultado = copiarMatriz(matriz);
-  
-  // 3. Para cada pixel, usar solo el valor del canal seleccionado
-  // for (let i = 0; i < resultado.length; i++) {
-  //   for (let j = 0; j < resultado[i].length; j++) {
-  //     const valor = matriz[i][j][canal];
-  //     resultado[i][j] = {
-  //       r: valor,
-  //       g: valor,
-  //       b: valor,
-  //       a: matriz[i][j].a
-  //     };
-  //   }
-  // }
-  
-  return []; // REEMPLAZAR CON TU CÓDIGO
+  // 1. Validar canal
+  if (!['r', 'g', 'b'].includes(canal)) {
+    throw new Error("El canal debe ser 'r', 'g' o 'b'");
+  }
+
+  // 2. Crear copia de la matriz original
+  const resultado = copiarMatriz(matriz);
+
+  // 3. Convertir cada pixel usando solo ese canal
+  for (let i = 0; i < resultado.length; i++) {
+    for (let j = 0; j < resultado[i].length; j++) {
+      const valor = matriz[i][j][canal];
+
+      resultado[i][j] = {
+        r: valor,
+        g: valor,
+        b: valor,
+        a: matriz[i][j].a
+      };
+    }
+  }
+
+  return resultado;
 }
+
 
 /**
  * Ejercicio 1.4: Obtener dimensiones de una imagen (5 puntos)
