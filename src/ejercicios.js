@@ -154,24 +154,22 @@ function obtenerCanal(matriz, canal) {
 }
 
 
-/**
- * Ejercicio 1.4: Obtener dimensiones de una imagen (5 puntos)
- * 
- * @param {string} rutaImagen - Ruta del archivo PNG
- * @returns {Object} - {ancho, alto, totalPixeles}
- * 
- * @example
- * const dims = obtenerDimensionesImagen('test.png');
- * // {ancho: 100, alto: 100, totalPixeles: 10000}
- */
 function obtenerDimensionesImagen(rutaImagen) {
-  // TODO: Obtener dimensiones sin cargar toda la imagen en memoria
-  
-  // Pista: Puedes cargar la imagen y usar obtenerDimensiones()
-  // o leer solo el header del PNG
-  
-  return { ancho: 0, alto: 0, totalPixeles: 0 }; // REEMPLAZAR
+  // Leer el archivo PNG
+  const buffer = fs.readFileSync(rutaImagen);
+  const png = PNG.sync.read(buffer);
+
+  // Obtener dimensiones
+  const ancho = png.width;
+  const alto = png.height;
+
+  return {
+    ancho,
+    alto,
+    totalPixeles: ancho * alto
+  };
 }
+
 
 // ============================================
 // SECCIÓN 2: OPERACIONES BÁSICAS (25 puntos)
