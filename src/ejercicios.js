@@ -1,8 +1,8 @@
 // ============================================
 // EDITOR DE IMÁGENES CON ÁLGEBRA MATRICIAL
 // ============================================
-// Nombre del estudiante: David Morles Guerrero
-// Fecha: 17/11/2025
+// Nombre del estudiante: David Morales Guerrero
+// Fecha: 18/11/2025
 // Grupo: 1-A
 
 const { PNG } = require('pngjs');
