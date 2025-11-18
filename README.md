@@ -1,6 +1,12 @@
 # Editor de Imágenes con Álgebra Matricial
+**Alumno:** David Morales Guerrero
+**Grupo:** 1-A
+**Fecha:** 18 de Noviembre de 2025
+**Materia:** Fundamentos de Álgebra
 
-**Fundamentos de Álgebra - Unidad III: Álgebra Lineal Aplicada**  
+---
+(Aquí empieza el contenido original del archivo...)
+**Unidad III: Álgebra Lineal Aplicada**  
 Tecnológico de Software
 
 ---
